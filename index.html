@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 36px; color: #1a1a2e; margin-bottom: 8px; }
+    .header p  { color: #666; font-size: 16px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-top: 4px solid var(--color);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .card-emoji  { font-size: 48px; margin-bottom: 14px; }
+    .card-name   { font-size: 20px; font-weight: bold; color: #1a1a2e; margin-bottom: 4px; }
+    .card-role   { font-size: 14px; color: var(--color); font-weight: bold; margin-bottom: 8px; }
+    .card-loc    { font-size: 13px; color: #999; }
+    .card-btn    { display: inline-block; margin-top: 16px; font-size: 13px; color: var(--color); font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>👥 Our Team</h1>
+    <p>Meet the people behind the work</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // ============================================================
+    // THIS IS YOUR "JSON" DATA — edit this to change the cards.
+    // It works exactly like a .json file but lives inside the HTML
+    // so Vercel can read it without any errors.
+    //
+    // To add a new person:
+    //   1. Add a new {...} block here (copy an existing one)
+    //   2. Create pages/theirid.html (copy any existing page file)
+    //   That's it!
+    // ============================================================
+    const TEAM = [
+      {
+        "id":       "arjun",
+        "name":     "Arjun Sharma",
+        "role":     "Frontend Developer",
+        "emoji":    "👨‍💻",
+        "location": "Hyderabad, India",
+        "email":    "arjun@example.com",
+        "bio":      "Arjun loves building clean user interfaces and has 3 years of experience with HTML, CSS and JavaScript.",
+        "skills":   ["HTML", "CSS", "JavaScript", "React"],
+        "color":    "#4f46e5"
+      },
+      {
+        "id":       "priya",
+        "name":     "Priya Nair",
+        "role":     "UI Designer",
+        "emoji":    "👩‍🎨",
+        "location": "Bangalore, India",
+        "email":    "priya@example.com",
+        "bio":      "Priya creates beautiful and intuitive designs. She believes good design should be invisible and just work.",
+        "skills":   ["Figma", "Illustrator", "Prototyping", "User Research"],
+        "color":    "#db2777"
+      },
+      {
+        "id":       "ravi",
+        "name":     "Ravi Kumar",
+        "role":     "Backend Developer",
+        "emoji":    "🧑‍🔧",
+        "location": "Chennai, India",
+        "email":    "ravi@example.com",
+        "bio":      "Ravi builds the engines that power applications. He specialises in databases and server-side logic.",
+        "skills":   ["Python", "Node.js", "PostgreSQL", "AWS"],
+        "color":    "#059669"
+      }
+    ];
+
+    // Build the cards automatically from the data above
+    const grid = document.getElementById('grid');
+    TEAM.forEach(person => {
+      const card = document.createElement('a');
+      card.href = 'pages/' + person.id + '.html';
+      card.className = 'card';
+      card.style.setProperty('--color', person.color);
+      card.innerHTML = `
+        <div class="card-emoji">${person.emoji}</div>
+        <div class="card-name">${person.name}</div>
+        <div class="card-role">${person.role}</div>
+        <div class="card-loc">📍 ${person.location}</div>
+        <div class="card-btn">View Profile →</div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
